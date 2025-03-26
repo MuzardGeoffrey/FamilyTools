@@ -1,0 +1,6 @@
+@FamilyTools.EasyCompta_HostAddress = http://localhost:5079
+
+GET {{FamilyTools.EasyCompta_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
