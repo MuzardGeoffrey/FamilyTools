@@ -8,7 +8,9 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\FamilyTools.Web\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\app\core\httphelper\" />
-    <Folder Include="src\assets\" />
+    <None Remove="src\app\core\**" />
+    <None Remove="src\assets\**" />
+    <TypeScriptConfiguration Remove="src\app\core\**" />
+    <TypeScriptConfiguration Remove="src\assets\**" />
   </ItemGroup>
 </Project>

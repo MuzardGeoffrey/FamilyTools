@@ -3,5 +3,5 @@ import { BaseModel } from './base-model';
 export interface User extends BaseModel {
   firstName: string;
   lastName: string;
-  surName: string;
+  username: string;
 }

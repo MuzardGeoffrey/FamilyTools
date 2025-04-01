@@ -5,17 +5,7 @@
   "projects": {
     "FamilyTools.Web": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "standalone": false
-        },
-        "@schematics/angular:directive": {
-          "standalone": false
-        },
-        "@schematics/angular:pipe": {
-          "standalone": false
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -77,7 +67,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "port": 65038
+            "proxyConfig": "proxy.conf.js"
           }
         },
         "extract-i18n": {
@@ -100,8 +90,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "karmaConfig": "karma.conf.js"
+            "scripts": []
           }
         }
       }
