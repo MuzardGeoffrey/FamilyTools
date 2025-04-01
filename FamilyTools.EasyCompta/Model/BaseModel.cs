@@ -1,12 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-using EasyCompta.Server.IModel;
-
-using Microsoft.EntityFrameworkCore;
-
-namespace EasyCompta.Server.Model
+﻿namespace EasyCompta.Server.Model
 {
-    public class BaseModel : IBaseModel
+    public class BaseModel
     {
         public int Id { get; set; }
         public DateTime CreationDate { get; set; }

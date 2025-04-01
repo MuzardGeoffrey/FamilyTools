@@ -1,8 +1,9 @@
-﻿using EasyCompta.Server.IModel;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EasyCompta.Server.Model
 {
-    public class AccountTag : BaseModel, IAccountTag
+    [Table("AccountTags")]
+    public class AccountTag : BaseModel
     {
         public string Name { get; set; }
         public string Color { get; set; }

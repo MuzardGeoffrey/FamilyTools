@@ -1,17 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EasyCompta.Server.IModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace EasyCompta.Server.Model
 {
     [Table("Users")]
-    public class User : BaseModel, IUser
+    public class User : BaseModel
     {
         public string FirstName { get; set; }
         
         public string LastName { get; set; }
         
-        public string SurName { get; set; }
+        public string Username { get; set; }
     }
 }

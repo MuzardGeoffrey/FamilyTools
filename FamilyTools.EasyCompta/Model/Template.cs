@@ -1,8 +1,9 @@
-﻿using EasyCompta.Server.IModel;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EasyCompta.Server.Model
 {
-    public class Template : BaseModel, ITemplate
+    [Table("Templates")]
+    public class Template : BaseModel
     {
         public string Name { get; set; }
 

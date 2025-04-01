@@ -15,7 +15,7 @@ namespace EasyCompta.Server.DataBase.Configuration
             builder.HasKey(e => e.Id);
             builder.Property(e => e.FirstName).IsRequired().HasMaxLength(50);
             builder.Property(e => e.LastName).IsRequired().HasMaxLength(50);
-            builder.Property(e => e.SurName).HasMaxLength(50);
+            builder.Property(e => e.Username).HasMaxLength(50);
             builder.Property(e => e.CreationDate).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(e => e.UpdateDate);
         }

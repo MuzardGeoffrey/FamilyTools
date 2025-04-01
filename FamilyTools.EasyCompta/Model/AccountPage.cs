@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-using EasyCompta.Server.IModel;
-
 namespace EasyCompta.Server.Model
 {
-    public class AccountPage : BaseModel, IAccountPage
+    [Table("AccountPages")]
+    public class AccountPage : BaseModel
     {
         public string Name { get; set; }
         

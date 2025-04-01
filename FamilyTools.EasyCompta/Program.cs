@@ -15,7 +15,7 @@ builder.Services.AddScoped<IAccountPageBusiness, AccountPageBusiness>();
 builder.Services.AddScoped<IAccountEnterBusiness, AccountEnterBusiness>();
 builder.Services.AddScoped<IAccountLineBusiness, AccountLineBusiness>();
 
-builder.AddSqlServerDbContext<AccountContext>("EasyCompta");
+builder.AddSqlServerDbContext<AccountContext>("easycompta");
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -36,5 +36,21 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+if (app.Environment.IsDevelopment())
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<AccountContext>();
+        context.Database.EnsureCreated();
+    }
+}
+else
+{
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    // The default HSTS value is 30 days.
+    // You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
 
 app.Run();

@@ -1,8 +1,9 @@
-﻿using EasyCompta.Server.IModel;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EasyCompta.Server.Model
 {
-    public class AccountLine: BaseModel, IAccountLine
+    [Table("AccountLines")]
+    public class AccountLine: BaseModel
     {
 
         public string Name { get; set; }

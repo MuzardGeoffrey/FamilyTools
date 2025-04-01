@@ -1,8 +1,9 @@
-﻿using EasyCompta.Server.IModel;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EasyCompta.Server.Model
 {
-    public class AccountEnter : BaseModel, IAccountEnter
+    [Table("AccountEnters")]
+    public class AccountEnter : BaseModel
     {
         public List<AccountLine> Lines { get; set; }
 
