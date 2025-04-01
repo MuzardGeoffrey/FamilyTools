@@ -1,7 +1,6 @@
 ﻿using EasyCompta.Server.IBusiness;
-using EasyCompta.Server.IModel;
+using EasyCompta.Server.Model;
 
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyTools.EasyCompta.Controllers
@@ -9,31 +8,41 @@ namespace FamilyTools.EasyCompta.Controllers
 
     [ApiController]
     [Route("easycompta/[controller]")]
-    public class AccountPageController : ControllerBase
+    public class AccountPageController(IAccountPageBusiness business, ILogger<AccountPageController> logger) : ControllerBase
     {
 
-        private readonly IAccountPageBusiness business;
-
-        public AccountPageController(IAccountPageBusiness business)
-        {
-            this.business = business;
-        }
+        private readonly IAccountPageBusiness _business = business;
+        private readonly ILogger<AccountPageController> _logger = logger;
 
         [Route("")]
-        [Route("Index")]
+        [Route("[action]")]
         [HttpGet]
-        public async Task<ActionResult<IAccountPage>> Index()
+        public async Task<IActionResult> Index()
         {
-            var result = await business.GetPageByDate(DateTime.Now);
-            return result;
+            try
+            {
+                return this.Ok(await _business.GetPageByDate(DateTime.Now));
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+                return this.BadRequest();
+            }
         }
 
         [Route("[action]")]
         [HttpGet]
-        public async Task<ActionResult<IAccountPage>> Get(DateTime date)
+        public async Task<IActionResult> Get(DateTime date)
         {
-            var result = await business.GetPageByDate(date);
-            return result;
+            try
+            {
+                return this.Ok(await _business.GetPageByDate(date));
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+                return this.BadRequest();
+            }
         }
     }
 }
