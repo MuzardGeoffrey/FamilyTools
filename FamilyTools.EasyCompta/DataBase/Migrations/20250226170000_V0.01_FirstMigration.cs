@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace EasyCompta.Server.DataBase.Migrations
+namespace FamilyTools.EasyCompta.DataBase.Migrations
 {
     /// <inheritdoc />
     public partial class V001_FirstMigration : Migration

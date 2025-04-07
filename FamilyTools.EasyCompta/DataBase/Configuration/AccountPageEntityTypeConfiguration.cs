@@ -1,8 +1,9 @@
-﻿using EasyCompta.Server.Model;
+﻿using FamilyTools.EasyCompta.Model;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EasyCompta.Server.DataBase.Configuration
+namespace FamilyTools.EasyCompta.DataBase.Configuration
 {
     public class AccountPageEntityTypeConfiguration : IEntityTypeConfiguration<AccountPage>
     {
@@ -16,22 +17,22 @@ namespace EasyCompta.Server.DataBase.Configuration
             builder.Property(e => e.CreationDate).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(e => e.UpdateDate);
 
-            // Relation avec AccountLines
-            builder.HasMany(e => e.Lines)
+            // Relation avec AccountEnters
+            builder.HasMany(e => e.Enters)
                   .WithMany()
-                  .UsingEntity(j => j.ToTable("AccountPageLines"));
+                  .UsingEntity(j => j.ToTable("AccountPageEnters"));
 
             // Configuration du dictionnaire PaymentDone
             builder.HasMany<User>()
                   .WithMany()
-                  .UsingEntity<Dictionary<string, object>>(
+                  .UsingEntity<Dictionary<object, string>>(
                       "AccountPagePayments",
                       j => j.HasOne<User>().WithMany().HasForeignKey("UserId"),
                       j => j.HasOne<AccountPage>().WithMany().HasForeignKey("AccountPageId"),
                       j =>
                       {
-                          j.Property<bool>("IsPaid");
                           j.HasKey("UserId", "AccountPageId");
+                          j.Property<bool>("IsPaid");
                       });
         }
     }
