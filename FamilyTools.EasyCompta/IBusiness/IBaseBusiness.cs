@@ -1,10 +1,6 @@
-﻿using EasyCompta.Server.Model;
-
-using Microsoft.EntityFrameworkCore.Storage;
-
-namespace EasyCompta.Server.IBusiness
+﻿namespace FamilyTools.EasyCompta.IBusiness
 {
-    public interface IBaseBusiness<T>
+    public interface IBaseBusiness<T> : IAsyncDisposable
     {
         public Task<T> Create(T t);
         public Task<T> Find(T t);

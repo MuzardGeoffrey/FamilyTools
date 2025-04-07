@@ -1,32 +1,31 @@
-﻿using EasyCompta.Server.Data;
-using EasyCompta.Server.IBusiness;
-using EasyCompta.Server.Model;
+﻿using FamilyTools.EasyCompta.DataBase.Context;
+using FamilyTools.EasyCompta.IBusiness;
+using FamilyTools.EasyCompta.Model;
 
-using Microsoft.EntityFrameworkCore;
-
-namespace EasyCompta.Server.Business
+namespace FamilyTools.EasyCompta.Business
 {
-    public class BaseBusiness<T>(AccountContext context) : IBaseBusiness<T>
+    public class BaseBusiness<T>(AccountContext context) : IBaseBusiness<T> where T : BaseModel
     {
-        private readonly AccountContext _context = context;
+        protected readonly AccountContext _context = context;
 
-        public async Task<T> Create(T t)
+        public virtual async Task<T> Create(T t)
         {
             if (t != null)
             {
-                this._context.Add(t);
-                await this._context.SaveChangesAsync();
-                return await this.Find(t);
+                t.CreationDate = DateTime.Now;
+                _context.Add(t);
+                await _context.SaveChangesAsync();
+                return await Find(t);
             }
             return default;
         }
 
-        public async Task<bool> Delete(int id)
+        public virtual async Task<bool> Delete(int id)
         {
             if (id != null)
             {
-                this._context.Remove(id);
-                var count = await this._context.SaveChangesAsync();
+                _context.Remove(id);
+                var count = await _context.SaveChangesAsync();
                 if (count > 0) { 
                     return true;
                 }
@@ -34,38 +33,45 @@ namespace EasyCompta.Server.Business
             return false;
         }
 
-        public async Task<T> Find(T t)
+        public virtual async Task<T> Find(T t)
         {
             if (t != null)
             {
-                return (T)await this._context.FindAsync(typeof(T), t);
+                return (T)await _context.FindAsync(typeof(T), t);
             }
             return default;
         }
 
-        public async Task<T> Find(int id)
+        public virtual async Task<T> Find(int id)
         {
             if (id != null)
             {
-                return (T)await this._context.FindAsync(typeof(T), id);
+                return (T)await _context.FindAsync(typeof(T), id);
             }
             return default;
         }
 
-        public async Task<T> Update(T t)
+        public virtual async Task<T> Update(T t)
         {
             if (t != null)
             {
-                var checkT = await this.Find(t);
+                var checkT = await Find(t);
 
                 if (checkT != null)
                 {
-                    this._context.Update(t);
-                    await this._context.SaveChangesAsync();
-                    return await this.Find(t);
+                    t.UpdateDate = DateTime.Now;
+                    _context.Update(t);
+                    await _context.SaveChangesAsync();
+                    return await Find(t);
                 }
             }
             return default;
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await DisposeAsync();
+            GC.SuppressFinalize(this);
         }
     }
 }

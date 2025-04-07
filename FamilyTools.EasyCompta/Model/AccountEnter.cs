@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EasyCompta.Server.Model
+using FamilyTools.EasyCompta.Model;
+
+namespace FamilyTools.EasyCompta.Model
 {
     [Table("AccountEnters")]
     public class AccountEnter : BaseModel
@@ -14,5 +16,13 @@ namespace EasyCompta.Server.Model
         public float TotalValue { get; set; }
 
         public DateOnly LifeTime { get; set; }
+
+        public AccountEnter()
+        {
+            if (this.Lines?.Count > 0)
+            {
+                this.TotalValue = this.Lines.Sum(line => line.Value);
+            }
+        }
     }
 }
