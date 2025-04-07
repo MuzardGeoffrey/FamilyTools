@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EasyCompta.Server.Model
+namespace FamilyTools.EasyCompta.Model
 {
     [Table("Templates")]
     public class Template : BaseModel

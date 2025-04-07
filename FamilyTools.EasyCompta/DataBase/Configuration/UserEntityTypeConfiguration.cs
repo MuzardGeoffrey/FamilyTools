@@ -1,11 +1,9 @@
-﻿using EasyCompta.Server.Model;
+﻿using FamilyTools.EasyCompta.Model;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using System.Reflection.Metadata;
-
-namespace EasyCompta.Server.DataBase.Configuration
+namespace FamilyTools.EasyCompta.DataBase.Configuration
 {
     public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     {

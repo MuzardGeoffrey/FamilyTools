@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EasyCompta.Server.Model
+namespace FamilyTools.EasyCompta.Model
 {
     [Table("AccountLines")]
     public class AccountLine: BaseModel

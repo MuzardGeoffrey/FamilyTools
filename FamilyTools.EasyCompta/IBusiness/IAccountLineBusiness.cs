@@ -1,6 +1,6 @@
-﻿using EasyCompta.Server.Model;
+﻿using FamilyTools.EasyCompta.Model;
 
-namespace EasyCompta.Server.IBusiness
+namespace FamilyTools.EasyCompta.IBusiness
 {
     public interface IAccountLineBusiness : IBaseBusiness<AccountLine>
     {

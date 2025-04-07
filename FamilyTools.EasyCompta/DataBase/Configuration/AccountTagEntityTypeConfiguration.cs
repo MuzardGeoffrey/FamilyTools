@@ -1,8 +1,9 @@
-﻿using EasyCompta.Server.Model;
+﻿using FamilyTools.EasyCompta.Model;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EasyCompta.Server.DataBase.Configuration
+namespace FamilyTools.EasyCompta.DataBase.Configuration
 {
     public class AccountTagEntityTypeConfiguration : IEntityTypeConfiguration<AccountTag>
     {

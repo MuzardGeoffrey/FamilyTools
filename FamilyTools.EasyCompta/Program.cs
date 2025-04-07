@@ -1,6 +1,7 @@
-using EasyCompta.Server.Business;
-using EasyCompta.Server.Data;
-using EasyCompta.Server.IBusiness;
+using FamilyTools.EasyCompta.Business;
+using FamilyTools.EasyCompta.DataBase.Context;
+using FamilyTools.EasyCompta.IBusiness;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

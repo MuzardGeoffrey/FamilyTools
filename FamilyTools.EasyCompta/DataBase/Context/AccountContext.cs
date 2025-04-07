@@ -1,9 +1,9 @@
 ﻿// AppDbContext.cs
 using Microsoft.EntityFrameworkCore;
-using EasyCompta.Server.Model;
-using EasyCompta.Server.DataBase.Configuration;
+using FamilyTools.EasyCompta.DataBase.Configuration;
+using FamilyTools.EasyCompta.Model;
 
-namespace EasyCompta.Server.Data
+namespace FamilyTools.EasyCompta.DataBase.Context
 {
     public class AccountContext : DbContext
     {

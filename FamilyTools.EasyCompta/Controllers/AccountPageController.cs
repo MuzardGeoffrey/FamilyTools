@@ -1,5 +1,4 @@
-﻿using EasyCompta.Server.IBusiness;
-using EasyCompta.Server.Model;
+﻿using FamilyTools.EasyCompta.IBusiness;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,8 +10,8 @@ namespace FamilyTools.EasyCompta.Controllers
     public class AccountPageController(IAccountPageBusiness business, ILogger<AccountPageController> logger) : ControllerBase
     {
 
-        private readonly IAccountPageBusiness _business = business;
-        private readonly ILogger<AccountPageController> _logger = logger;
+        private readonly IAccountPageBusiness business = business;
+        private readonly ILogger<AccountPageController> logger = logger;
 
         [Route("")]
         [Route("[action]")]
@@ -21,11 +20,11 @@ namespace FamilyTools.EasyCompta.Controllers
         {
             try
             {
-                return this.Ok(await _business.GetPageByDate(DateTime.Now));
+                return this.Ok(await this.business.GetPageByDate(DateTime.Now));
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex.Message);
+                this.logger.LogError(ex.Message);
                 return this.BadRequest();
             }
         }
@@ -36,11 +35,11 @@ namespace FamilyTools.EasyCompta.Controllers
         {
             try
             {
-                return this.Ok(await _business.GetPageByDate(date));
+                return this.Ok(await this.business.GetPageByDate(date));
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex.Message);
+                this.logger.LogError(ex.Message);
                 return this.BadRequest();
             }
         }
