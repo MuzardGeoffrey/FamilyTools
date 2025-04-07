@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace EasyCompta.Server.DataBase.Migrations
+namespace FamilyTools.EasyCompta.DataBase.Migrations
 {
     [DbContext(typeof(AccountContext))]
     [Migration("20250226170000_V0.01_FirstMigration")]
