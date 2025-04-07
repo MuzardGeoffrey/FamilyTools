@@ -1,11 +1,11 @@
 import { BaseModel } from './base-model';
-import { AccountLine } from './account-line';
 import { User } from './user';
+import { AccountEnter } from './account-enter';
 
 export interface AccountPage extends BaseModel {
   name: string;
-  lines: AccountLine[];
-  paymentDone: Map<boolean, User>;
+  lines: AccountEnter[];
+  paymentDone: Map<User, boolean>;
   isClosing: boolean;
   date: Date;
 }

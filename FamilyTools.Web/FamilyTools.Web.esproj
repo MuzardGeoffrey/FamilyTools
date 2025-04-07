@@ -7,10 +7,4 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\FamilyTools.Web\browser\</BuildOutputFolder>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="src\app\core\**" />
-    <None Remove="src\assets\**" />
-    <TypeScriptConfiguration Remove="src\app\core\**" />
-    <TypeScriptConfiguration Remove="src\assets\**" />
-  </ItemGroup>
 </Project>
