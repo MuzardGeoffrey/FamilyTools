@@ -404,4 +404,4 @@ testem.log
 Thumbs.db
 
 # Cache files
-\.angular\cache
+/FamilyTools.Web/.angular/cache
