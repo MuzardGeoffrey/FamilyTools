@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FamilyTools.EasyCompta.Model
+namespace FamilyTools.EasyCompta.Models
 {
     [Table("AccountPages")]
     public class AccountPage : BaseModel
@@ -9,8 +9,7 @@ namespace FamilyTools.EasyCompta.Model
 
         public List<AccountEnter> Enters { get; set; }
 
-        [NotMapped]
-        public Dictionary<User, bool> PaymentDone { get; set; }
+        public List<PaymentDone> PaymentDones { get; set; }
 
         public bool IsClosing { get; set; }
 
@@ -23,16 +22,6 @@ namespace FamilyTools.EasyCompta.Model
             if (Enters?.Count > 0)
             {
                 Total = Enters.Sum(enter => enter.TotalValue);
-
-                PaymentDone ??= [];
-
-                PaymentDone = Enters.SelectMany(enter => enter.Lines)
-                        .Select(line => line.UserLink)
-                        .Distinct()
-                        .ToDictionary(
-                        user => user,
-                        user => PaymentDone != null && PaymentDone.ContainsKey(user) ? PaymentDone[user] : false
-                    );
             }
         }
     }

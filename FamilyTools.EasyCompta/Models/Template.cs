@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FamilyTools.EasyCompta.Model
+namespace FamilyTools.EasyCompta.Models
 {
     [Table("Templates")]
     public class Template : BaseModel
     {
         public string Name { get; set; }
 
-        public List<AccountLine> Lines { get; set; }
+        public List<AccountEnter> Enters { get; set; }
 
-        public DateOnly LifeTime { get; set; }
+        public DateTime Date { get; set; }
     }
 }

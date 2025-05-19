@@ -1,21 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-using FamilyTools.EasyCompta.Model;
-
-namespace FamilyTools.EasyCompta.Model
+namespace FamilyTools.EasyCompta.Models
 {
     [Table("AccountEnters")]
     public class AccountEnter : BaseModel
     {
         public List<AccountLine> Lines { get; set; }
-
         public AccountTag Tag { get; set; }
-
+        public int TagId { get; set; }
         public string Name { get; set; }
-
         public float TotalValue { get; set; }
-
-        public DateOnly LifeTime { get; set; }
+        public DateOnly Date { get; set; }
+        public int PageId { get; set; }
+        public AccountPage Page { get; set; } = null!;
 
         public AccountEnter()
         {

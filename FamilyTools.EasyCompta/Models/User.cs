@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FamilyTools.EasyCompta.Model
+namespace FamilyTools.EasyCompta.Models
 {
     [Table("Users")]
     public class User : BaseModel

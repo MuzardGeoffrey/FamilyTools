@@ -1,4 +1,4 @@
-﻿namespace FamilyTools.EasyCompta.Model
+﻿namespace FamilyTools.EasyCompta.Models
 {
     public class BaseModel
     {
