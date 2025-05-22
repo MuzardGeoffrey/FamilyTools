@@ -69,131 +69,62 @@
             <th>Montant <span class="sort-icon">↕</span></th>
             <th>Assigné à</th>
             <th>Date <span class="sort-icon">↕</span></th>
-            <th>Statut</th>
             <th class="action-column">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Facture Électricité</td>
-            <td><span class="tag-icon">⚡</span></td>
-            <td class="numeric-value">120,50 €</td>
-            <td>
-              <div class="assignee-list">
-                <span class="assignee-chip">Pierre</span>
-                <span class="assignee-chip">Marie</span>
-              </div>
-            </td>
-            <td>05/03/2025</td>
-            <td>
-              <div class="payment-status">
-                <span class="payment-badge paid">Payé</span>
-              </div>
-            </td>
-            <td>
-              <div class="row-actions">
-                <span class="action-icon">✏️</span>
-                <span class="action-icon">🗑️</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Loyer Appartement</td>
-            <td><span class="tag-icon">🏠</span></td>
-            <td class="numeric-value">850,00 €</td>
-            <td>
-              <div class="assignee-list">
-                <span class="assignee-chip">Pierre</span>
-                <span class="assignee-chip">Marie</span>
-                <span class="assignee-chip">Jean</span>
-              </div>
-            </td>
-            <td>01/03/2025</td>
-            <td>
-              <div class="payment-status">
-                <span class="payment-badge paid">Payé</span>
-              </div>
-            </td>
-            <td>
-              <div class="row-actions">
-                <span class="action-icon">✏️</span>
-                <span class="action-icon">🗑️</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Internet Fibre</td>
-            <td><span class="tag-icon">🌐</span></td>
-            <td class="numeric-value">45,99 €</td>
-            <td>
-              <div class="assignee-list">
-                <span class="assignee-chip">Jean</span>
-              </div>
-            </td>
-            <td>15/03/2025</td>
-            <td>
-              <div class="payment-status">
-                <span class="payment-badge">En attente</span>
-              </div>
-            </td>
-            <td>
-              <div class="row-actions">
-                <span class="action-icon">✏️</span>
-                <span class="action-icon">🗑️</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Courses Alimentaires</td>
-            <td><span class="tag-icon">🛒</span></td>
-            <td class="numeric-value">187,32 €</td>
-            <td>
-              <div class="assignee-list">
-                <span class="assignee-chip">Marie</span>
-              </div>
-            </td>
-            <td>12/03/2025</td>
-            <td>
-              <div class="payment-status">
-                <span class="payment-badge paid">Payé</span>
-              </div>
-            </td>
-            <td>
-              <div class="row-actions">
-                <span class="action-icon">✏️</span>
-                <span class="action-icon">🗑️</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Frais de Ménage</td>
-            <td><span class="tag-icon">🧹</span></td>
-            <td class="numeric-value">60,00 €</td>
-            <td>
-              <div class="assignee-list">
-                <span class="assignee-chip">Pierre</span>
-                <span class="assignee-chip">Jean</span>
-              </div>
-            </td>
-            <td>20/03/2025</td>
-            <td>
-              <div class="payment-status">
-                <span class="payment-badge">En attente</span>
-              </div>
-            </td>
-            <td>
-              <div class="row-actions">
-                <span class="action-icon">✏️</span>
-                <span class="action-icon">🗑️</span>
-              </div>
-            </td>
-          </tr>
+          @for (enter of current_page?.enters; track $index) {
+            <tr>
+              <td>{{ enter.name }}</td>
+              <td><span class="tag-icon">⚡</span></td>
+              <td class="numeric-value">{{ enter.totalValue }}</td>
+              <td>
+                <div class="assignee-list">
+                  @for (line of enter.lines; track $index) {
+                    <span class="assignee-chip">{{ line.name }}</span>
+                  }
+                </div>
+              </td>
+              <td> {{ enter.date }}</td>
+              <td>
+                <div class="row-actions">
+                  <button type="button"><span class="action-icon">✏️</span></button>
+                  <button type="button"><span class="action-icon">🗑️</span></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+          }
         </tbody>
       </table>
     </div>
     
     <h2>Récapitulatif par personne</h2>
     <div class="summary-section">
+
+      @for (payment_done of current_page?.paymentDones; track $index) {
+        <div class="summary-card">
+          <div class="summary-header">
+            <div class="summary-avatar">P</div>
+            <h3>{{ payment_done[0].userName }}</h3>
+          </div>
+          <div class="summary-amount">343,50 €</div>
+          <div class="summary-status">
+            <span>Mois payé :</span>
+            <label class="toggle-switch">
+              @if (payment_done[1]) {
+                <input type="checkbox" checked>
+              }
+              @else {
+                <input type="checkbox">
+              }
+              
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      }
+
       <div class="summary-card">
         <div class="summary-header">
           <div class="summary-avatar">P</div>
@@ -208,36 +139,7 @@
           </label>
         </div>
       </div>
-      
-      <div class="summary-card">
-        <div class="summary-header">
-          <div class="summary-avatar">M</div>
-          <h3>Marie</h3>
-        </div>
-        <div class="summary-amount">385,94 €</div>
-        <div class="summary-status">
-          <span>Mois payé :</span>
-          <label class="toggle-switch">
-            <input type="checkbox" checked>
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-      </div>
-      
-      <div class="summary-card">
-        <div class="summary-header">
-          <div class="summary-avatar">J</div>
-          <h3>Jean</h3>
-        </div>
-        <div class="summary-amount">318,66 €</div>
-        <div class="summary-status">
-          <span>Mois payé :</span>
-          <label class="toggle-switch">
-            <input type="checkbox">
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-      </div>
+
     </div>
   </div>
   

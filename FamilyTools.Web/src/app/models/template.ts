@@ -1,8 +1,15 @@
 import { BaseModel } from './base-model';
 import { AccountLine } from './account-line';
 
-export interface Template extends BaseModel {
+export class Template extends BaseModel {
   name: string;
   lines: AccountLine[];
-  lifeTime: Date; // Note: Angular/TypeScript n'a pas d'équivalent direct à DateOnly, on utilise Date
+  lifeTime: Date;
+
+  constructor(name: string, lines: AccountLine[], lifeTime: Date, id?: number, creationDate?: Date, updateDate?: Date) {
+    super(id, creationDate, updateDate);
+    this.name = name;
+    this.lines = lines;
+    this.lifeTime = lifeTime;
+  }
 }
