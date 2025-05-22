@@ -1,4 +1,4 @@
-﻿using FamilyTools.EasyCompta.Model;
+﻿using FamilyTools.EasyCompta.Models;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

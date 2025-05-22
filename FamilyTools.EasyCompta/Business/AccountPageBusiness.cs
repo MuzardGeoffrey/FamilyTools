@@ -1,6 +1,6 @@
 ﻿using FamilyTools.EasyCompta.DataBase.Context;
 using FamilyTools.EasyCompta.IBusiness;
-using FamilyTools.EasyCompta.Model;
+using FamilyTools.EasyCompta.Models;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +11,10 @@ namespace FamilyTools.EasyCompta.Business
         private readonly AccountContext context = context;
 
         public async Task<AccountPage> GetPageByDate(DateTime date) {
+            if (!await context.AccountPages.AnyAsync())
+            {
+                return new();
+            }
             if (date != default)
             {
                 return await this.context.AccountPages.Where(page => page.Date.Month == date.Month && page.Date.Year == date.Year).FirstOrDefaultAsync();

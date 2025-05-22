@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FamilyTools.EasyCompta.IBusiness;
-using FamilyTools.EasyCompta.Model;
+using FamilyTools.EasyCompta.Models;
 
 namespace FamilyTools.EasyCompta.Controllers
 {

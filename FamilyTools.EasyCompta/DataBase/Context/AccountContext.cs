@@ -1,7 +1,7 @@
 ﻿// AppDbContext.cs
 using Microsoft.EntityFrameworkCore;
 using FamilyTools.EasyCompta.DataBase.Configuration;
-using FamilyTools.EasyCompta.Model;
+using FamilyTools.EasyCompta.Models;
 
 namespace FamilyTools.EasyCompta.DataBase.Context
 {

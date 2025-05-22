@@ -1,4 +1,4 @@
-﻿using FamilyTools.EasyCompta.Model;
+﻿using FamilyTools.EasyCompta.Models;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -19,21 +19,15 @@ namespace FamilyTools.EasyCompta.DataBase.Configuration
 
             // Relation avec AccountEnters
             builder.HasMany(e => e.Enters)
-                  .WithMany()
-                  .UsingEntity(j => j.ToTable("AccountPageEnters"));
+                  .WithOne(e => e.Page)
+                  .HasForeignKey(e => e.PageId)
+                  .IsRequired();
 
             // Configuration du dictionnaire PaymentDone
-            builder.HasMany<User>()
-                  .WithMany()
-                  .UsingEntity<Dictionary<object, string>>(
-                      "AccountPagePayments",
-                      j => j.HasOne<User>().WithMany().HasForeignKey("UserId"),
-                      j => j.HasOne<AccountPage>().WithMany().HasForeignKey("AccountPageId"),
-                      j =>
-                      {
-                          j.HasKey("UserId", "AccountPageId");
-                          j.Property<bool>("IsPaid");
-                      });
+            builder.HasMany<PaymentDone>(e => e.PaymentDones)
+                  .WithOne(e => e.Page)
+                  .HasForeignKey(e => e.PageId)
+                  .IsRequired();
         }
     }
 }

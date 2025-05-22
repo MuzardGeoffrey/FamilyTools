@@ -1,4 +1,4 @@
-﻿using FamilyTools.EasyCompta.Model;
+﻿using FamilyTools.EasyCompta.Models;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -17,10 +17,10 @@ namespace FamilyTools.EasyCompta.DataBase.Configuration
             builder.Property(e => e.UpdateDate);
 
             // Relation avec User
-            builder.HasOne(e => e.UserLink)
+            builder.HasOne(e => e.User)
                   .WithMany()
-                  .HasForeignKey("UserLinkId")
-                  .OnDelete(DeleteBehavior.Restrict);
+                  .HasForeignKey(e => e.UserId)
+                  .IsRequired();
         }
     }
 }
