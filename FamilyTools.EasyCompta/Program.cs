@@ -2,8 +2,6 @@ using FamilyTools.EasyCompta.Business;
 using FamilyTools.EasyCompta.DataBase.Context;
 using FamilyTools.EasyCompta.IBusiness;
 
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();

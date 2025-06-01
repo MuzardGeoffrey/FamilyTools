@@ -13,18 +13,18 @@ namespace FamilyTools.EasyCompta.Business
             if (t != null)
             {
                 t.CreationDate = DateTime.Now;
-                _context.Add(t);
+                this._context.Add(t);
                 await _context.SaveChangesAsync();
-                return await Find(t);
+                return await this.Find(t) ?? default;
             }
             return default;
         }
 
         public virtual async Task<bool> Delete(int id)
         {
-            if (id != null)
+            if (id != default)
             {
-                _context.Remove(id);
+                this._context.Remove(id);
                 var count = await _context.SaveChangesAsync();
                 if (count > 0) { 
                     return true;
@@ -33,20 +33,20 @@ namespace FamilyTools.EasyCompta.Business
             return false;
         }
 
-        public virtual async Task<T> Find(T t)
+        public virtual async Task<T?> Find(T t)
         {
             if (t != null)
             {
-                return (T)await _context.FindAsync(typeof(T), t);
+                return (T?)await this._context.FindAsync(typeof(T), t.Id);
             }
             return default;
         }
 
-        public virtual async Task<T> Find(int id)
+        public virtual async Task<T?> Find(int id)
         {
-            if (id != null)
+            if (id != default)
             {
-                return (T)await _context.FindAsync(typeof(T), id);
+                return (T?)await this._context.FindAsync(typeof(T), id);
             }
             return default;
         }
@@ -60,18 +60,12 @@ namespace FamilyTools.EasyCompta.Business
                 if (checkT != null)
                 {
                     t.UpdateDate = DateTime.Now;
-                    _context.Update(t);
-                    await _context.SaveChangesAsync();
-                    return await Find(t);
+                    this._context.Update(t);
+                    await this._context.SaveChangesAsync();
+                    return await this.Find(t) ?? default;
                 }
             }
             return default;
-        }
-
-        public async ValueTask DisposeAsync()
-        {
-            await DisposeAsync();
-            GC.SuppressFinalize(this);
         }
     }
 }

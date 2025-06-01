@@ -13,6 +13,24 @@ namespace FamilyTools.EasyCompta.Controllers
         private readonly ILogger<UserController> logger = logger;
         private readonly IUserBusiness business = business;
 
+        [Route("[action]")]
+        [Route("")]
+        [HttpGet]
+        public async Task<ActionResult> List()
+        {
+            try
+            {
+                var users = await this.business.UserList();
+
+                return this.Ok(users);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex.Message);
+                return this.BadRequest();
+            }
+        }
+
         [Route("[action]/{id}")]
         [HttpGet]
         public async Task<ActionResult> Index(int id)
@@ -30,7 +48,7 @@ namespace FamilyTools.EasyCompta.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FirstName,LastName,Username")] User user)
         {
             try
@@ -40,14 +58,14 @@ namespace FamilyTools.EasyCompta.Controllers
             catch (Exception ex)
             {
                 this.logger.LogError(ex.Message);
-                return this.BadRequest();
+                return this.BadRequest(ex.Message);
             }
         }
 
         [Route("[action]")]
         [HttpPost]
         [HttpPut]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("Id,FirstName,LastName,Username")] User user)
         {
             try
