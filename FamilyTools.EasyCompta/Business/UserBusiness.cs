@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using FamilyTools.EasyCompta.DataBase.Context;
+﻿using FamilyTools.EasyCompta.DataBase.Context;
 using FamilyTools.EasyCompta.IBusiness;
 using FamilyTools.EasyCompta.Models;
 

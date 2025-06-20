@@ -24,9 +24,11 @@ namespace FamilyTools.EasyCompta.Business
         {
             if (id != default)
             {
-                this._context.Remove(id);
-                var count = await _context.SaveChangesAsync();
-                if (count > 0) { 
+                T? t = await this.Find(id);
+                if (t != null)
+                {
+                    this._context.Remove(t);
+                    await _context.SaveChangesAsync();
                     return true;
                 }
             }
