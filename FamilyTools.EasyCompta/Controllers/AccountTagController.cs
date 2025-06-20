@@ -12,6 +12,25 @@ namespace FamilyTools.EasyCompta.Controllers
         private readonly ILogger<AccountTagController> logger = logger;
         private readonly IAccountTagBusiness business = business;
 
+
+        [Route("[action]")]
+        [Route("")]
+        [HttpGet]
+        public async Task<ActionResult> List()
+        {
+            try
+            {
+                var tags = await this.business.TagList();
+
+                return this.Ok(tags);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex.Message);
+                return this.BadRequest();
+            }
+        }
+
         [Route("[action]/{id}")]
         [HttpGet]
         public async Task<IActionResult> Index(int id)
