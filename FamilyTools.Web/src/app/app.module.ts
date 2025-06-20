@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [
@@ -9,8 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     AppRoutingModule
-  ],
-  providers: [],
+],
+  providers: [UserService],
   bootstrap: []
 })
 export class AppModule { }

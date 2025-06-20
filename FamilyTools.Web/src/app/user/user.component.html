@@ -7,17 +7,42 @@
 <body>
   <div class="app-container">
     <div class="header">
-      <h1>Tableau de Bord Comptable</h1>
+      <h1>Tableau de Bord des Utilisateurs</h1>
     </div>
     
-    <div class="navigation-tabs">
-      <div class="tab">Tableau de données</div>
-      <div class="tab">Diagrammes</div>
-      <div class="tab active">Utilisateurs</div>
-      <div class="tab">Paramètres</div>
+    <div class="card">
+    <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Prénom</th>
+            <th>nom de famille</th>
+            <th>Nom d'utilisateur</th>
+            <th>Date de création</th>
+            <th class="action-column">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of service.Users; track $index) {
+            <tr>
+              <td>{{ user.id }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.userName }}</td>
+              <td>{{ user.creationDate | date:'shortDate'}}</td>
+              <td>
+                <div class="row-actions">
+                  <button type="button"><span class="action-icon">✏️</span></button>
+                  <button type="button" (click)="DeleteUser(user.id ?? 0)"><span class="action-icon">🗑️</span></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+          }
+        </tbody>
+      </table>
     </div>
-    
-    
+
     <!-- Ajout utilisateur -->
     <div class="breadcrumb">
       <span class="breadcrumb-item"><a href="#" class="breadcrumb-link">Accueil</a></span>
@@ -30,7 +55,7 @@
         <h2 class="card-title">Ajouter un nouvel utilisateur</h2>
       </div>
       
-      <form [formGroup]="userform" (ngSubmit)="onSubmit()">
+      <form [formGroup]="userform" (ngSubmit)="CreateUser()">
         <div class="form-container">
           
           <div class="form-section">
