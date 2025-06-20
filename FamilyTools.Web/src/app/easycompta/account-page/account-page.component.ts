@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { AccountTag } from '../../models/account-tag';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-accountpage',
@@ -17,8 +18,8 @@ pages: {[id: number] : AccountPage} = [];
   month_list: Date[] = [];
   current_tags: AccountTag[] = [];
 
-  private _http = inject(HttpClient);
-  private router = inject(Router);
+  private readonly _http = inject(HttpClient);
+  private readonly router = inject(Router);
 
   ngOnInit(): void {
     this.call_new_page();

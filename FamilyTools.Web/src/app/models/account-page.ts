@@ -17,4 +17,16 @@ export class AccountPage extends BaseModel {
     this.isClosing = isClosing;
     this.date = date;
   }
+
+    getUsers(): User[] {
+      return Array.from(this.paymentDones.keys());
+    }
+
+    getTotalForUser(id: number){
+      this.enters.map(enters => enters.lines.filter(lines => lines.userLink.id == id).reduce((acc, lines) => acc + lines.value, 0))
+    }
+
+    getTotal(){
+      this.enters.reduce((acc, enter) => acc + enter.totalValue, 0)
+    }
 }

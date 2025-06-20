@@ -30,16 +30,18 @@
             <label>Catégorie:</label>
             <select>
               <option value="">Toutes</option>
-              @for (tag of this.current_tags; track $index) {}
+              @for (tag of this.current_tags; track $index) {
+                <option value="{{ tag.id }}">{{ tag.name }}</option>
+              }
             </select>
           </div>
           <div class="filter-control">
             <label>Personne:</label>
             <select>
               <option value="">Toutes</option>
-              <option value="pierre">Pierre</option>
-              <option value="marie">Marie</option>
-              <option value="jean">Jean</option>
+              @for (user of this.current_page?.getUsers(); track $index) {
+                <option value="{{ user.id }}">{{ user.userName }}</option>
+              }
             </select>
           </div>
           <div class="filter-control">
@@ -96,13 +98,12 @@
     <h2>Récapitulatif par personne</h2>
     <div class="summary-section">
 
-      @for (payment_done of current_page?.paymentDones; track $index) {
+      @for (payment_done of this.current_page?.paymentDones; track $index) {
         <div class="summary-card">
           <div class="summary-header">
-            <div class="summary-avatar">P</div>
             <h3>{{ payment_done[0].userName }}</h3>
           </div>
-          <div class="summary-amount">343,50 €</div>
+          <div class="summary-amount">{{ this.current_page?.getTotalForUser(payment_done[0].id ?? 0) }}</div>
           <div class="summary-status">
             <span>Mois payé :</span>
             <label class="toggle-switch">
@@ -112,26 +113,9 @@
               @else {
                 <input type="checkbox">
               }
-              
               <span class="toggle-slider"></span>
             </label>
           </div>
         </div>
       }
-
-      <div class="summary-card">
-        <div class="summary-header">
-          <div class="summary-avatar">P</div>
-          <h3>Pierre</h3>
-        </div>
-        <div class="summary-amount">343,50 €</div>
-        <div class="summary-status">
-          <span>Mois payé :</span>
-          <label class="toggle-switch">
-            <input type="checkbox" checked>
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-      </div>
-
     </div>
