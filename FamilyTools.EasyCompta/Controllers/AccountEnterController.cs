@@ -75,5 +75,20 @@ namespace FamilyTools.EasyCompta.Controllers
                 return this.BadRequest();
             }
         }
+
+        [Route("[action]/{month}/{year}")]
+        [HttpGet]
+        public async Task<IActionResult> ExpensesByTagForAMonth(int month, int year)
+        {
+            try
+            {
+                return this.Ok(await this.business.ExpensesByTagForAMonth(month, year));
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex.Message);
+                return this.BadRequest();
+            }
+        }
     }
 }

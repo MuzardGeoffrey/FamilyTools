@@ -2,6 +2,8 @@
 using FamilyTools.EasyCompta.IBusiness;
 using FamilyTools.EasyCompta.Models;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace FamilyTools.EasyCompta.Business
 {
     public class AccountEnterBusiness(AccountContext context) : BaseBusiness<AccountEnter>(context), IAccountEnterBusiness
@@ -15,6 +17,7 @@ namespace FamilyTools.EasyCompta.Business
             {
                 return new ();
             }
+            accountEnter.Id = default;
 
             AccountEnter = accountEnter;
             CalculTotalValue();
@@ -48,6 +51,23 @@ namespace FamilyTools.EasyCompta.Business
             
         }
 
+        public async Task<Dictionary<int, int>> ExpensesByTagForAMonth(int month, int year)
+        {
+            if (month >= 1 && month <= 12)
+            {
+                await this._context.AccountEnters.Where(data => data.Date.Month == month && data.Date.Year == year)
+                    .GroupBy(data => data.TagId)
+                    .Select(data => new
+                    {
+                        data.Key,
+                        sum = data.Sum(value => value.TotalValue)
+                    })
+                    .ToDictionaryAsync(group => group.Key, group => group.sum);
+            }
+
+            return [];
+        }
+
         private void CalculTotalValue()
         {
             float totalValue = 0;
@@ -59,5 +79,7 @@ namespace FamilyTools.EasyCompta.Business
 
             AccountEnter.TotalValue = totalValue;
         }
+
+
     }
 }

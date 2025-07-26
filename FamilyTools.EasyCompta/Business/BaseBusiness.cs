@@ -12,6 +12,7 @@ namespace FamilyTools.EasyCompta.Business
         {
             if (t != null)
             {
+                t.Id = default;
                 t.CreationDate = DateTime.Now;
                 this._context.Add(t);
                 await _context.SaveChangesAsync();
