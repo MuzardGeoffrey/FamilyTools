@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (tag of tags; track $index) {
+          @for (tag of this.service.all_tag; track $index) {
             <tr>
               <td>{{ tag.id }}</td>
               <td>{{ tag.name }}</td>
@@ -29,7 +29,7 @@
               <td>
                 <div class="row-actions">
                   <button type="button"><span class="action-icon">✏️</span></button>
-                  <button type="button" (click)="deleteTag(tag.id ?? 0)"><span class="action-icon">🗑️</span></button>
+                  <button type="button" (click)="deleteTag(tag.id)"><span class="action-icon">🗑️</span></button>
                 </div>
               </td>
             </tr>

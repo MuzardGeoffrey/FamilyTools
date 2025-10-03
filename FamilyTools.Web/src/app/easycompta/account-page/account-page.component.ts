@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { AccountTag } from '../../models/account-tag';
-import { User } from '../../models/user';
 
 @Component({
   selector: 'app-accountpage',
@@ -17,6 +16,7 @@ pages: {[id: number] : AccountPage} = [];
   current_page: AccountPage | undefined;
   month_list: Date[] = [];
   current_tags: AccountTag[] = [];
+  selectedFile: File | undefined;
 
   private readonly _http = inject(HttpClient);
   private readonly router = inject(Router);
@@ -39,7 +39,11 @@ pages: {[id: number] : AccountPage} = [];
   private get_all_month() {
     if (this._http) {
       this._http.get<Date[]>('api/easycompta/AccountPage/getallmonth').subscribe({
-        next: result => this.month_list = result,
+        next: result => {
+          result.forEach(e => {
+            this.month_list.push(new Date(e));
+          });
+        },
         error: console.error
       });
     }  
@@ -50,11 +54,12 @@ pages: {[id: number] : AccountPage} = [];
       {
         this._http.get<AccountPage>('api/easycompta/AccountPage').subscribe({
           next: result => {
+            result.date = new Date(result.date);
             this.current_page = result;
           },
           error: console.error
         });
-  
+
         if (this.current_page && this.current_page.id) {
           this.pages[this.current_page.id] = this.current_page;
         }
@@ -64,4 +69,32 @@ pages: {[id: number] : AccountPage} = [];
   addAccountEnter(){
     this.router.navigate(["/accountenter"]);
   }
+
+  onFileSelected(event: any) {
+    console.log('onFileSelected');
+    const file: File = event.target.files[0];
+    console.log(file.type);
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
+  uploadFile() {
+    console.log('uploadFile');
+    if (this.selectedFile) {
+      const formData = new FormData();
+
+      formData.append('csvFile', this.selectedFile, this.selectedFile.name);
+
+      this._http.post("api/easycompta/ImportCSV", formData).subscribe({
+        next: (response) => {
+          console.log('Fichier envoyé avec succès', response);
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'envoi', error);
+        }
+      });
+    }
+  }
+  
 }

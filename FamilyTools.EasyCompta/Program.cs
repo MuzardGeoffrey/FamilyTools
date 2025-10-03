@@ -1,26 +1,30 @@
 using FamilyTools.EasyCompta.Business;
-using FamilyTools.EasyCompta.DataBase.Context;
 using FamilyTools.EasyCompta.IBusiness;
+using FamilyTools.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.AddSqlServerDbContext<EasyComptaContext>("easycompta");
 
 builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddScoped<IUserBusiness, UserBusiness>();
 builder.Services.AddScoped<ITemplateBusiness, TemplateBusiness>();
+builder.Services.AddScoped<IAccountEnterBusiness, AccountEnterBusiness>();
 builder.Services.AddScoped<IAccountTagBusiness, AccountTagBusiness>();
 builder.Services.AddScoped<IAccountPageBusiness, AccountPageBusiness>();
-builder.Services.AddScoped<IAccountEnterBusiness, AccountEnterBusiness>();
 builder.Services.AddScoped<IAccountLineBusiness, AccountLineBusiness>();
+builder.Services.AddScoped<IImportCSVBusiness, ImportCSVBusiness>();
 
-builder.AddSqlServerDbContext<AccountContext>("easycompta");
+
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+
 
 app.MapDefaultEndpoints();
 
@@ -38,11 +42,12 @@ app.MapControllers();
 
 if (app.Environment.IsDevelopment())
 {
-    using (var scope = app.Services.CreateScope())
-    {
-        var context = scope.ServiceProvider.GetRequiredService<AccountContext>();
-        context.Database.EnsureCreated();
-    }
+    //using (var scope = app.Services.CreateScope())
+    //{
+    //    var context = scope.ServiceProvider.GetRequiredService<EasyComptaContext>();
+    //    context.Database.EnsureCreated();
+    //    context.EnsureSeedData().GetAwaiter().GetResult();
+    //}
 }
 else
 {

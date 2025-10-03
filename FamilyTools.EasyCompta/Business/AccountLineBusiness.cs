@@ -1,6 +1,8 @@
-﻿using FamilyTools.EasyCompta.DataBase.Context;
+﻿using System.ComponentModel;
+
+using FamilyTools.Data.Context;
+using FamilyTools.Data.Models.EasyCompta;
 using FamilyTools.EasyCompta.IBusiness;
-using FamilyTools.EasyCompta.Models;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -8,8 +10,23 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FamilyTools.EasyCompta.Business
 {
-    public class AccountLineBusiness(AccountContext context) : BaseBusiness<AccountLine>(context), IAccountLineBusiness
+    public class AccountLineBusiness(EasyComptaContext context) : BaseBusiness<AccountLine>(context), IAccountLineBusiness
     {
+        public async Task CreateList(List<AccountLine> lines)
+        {
+            if (lines?.Count >= 0)
+            {
+                foreach (var line in lines)
+                {
+                    if (await ControlDuplicate(line))
+                    {
+                        this._context.AccountLines.Add(line);
+                    }
+                }
+                await this._context.SaveChangesAsync();
+            }
+        }
+
         public async Task<Dictionary<int, int>> ExpensesByUserForAYear(int year)
         {
             if (year != default)
@@ -25,6 +42,11 @@ namespace FamilyTools.EasyCompta.Business
             }
 
             return [];
+        }
+
+        private async Task<bool> ControlDuplicate(AccountLine line)
+        {
+            return !await this._context.AccountLines.AnyAsync(x => x.Name == line.Name && x.Value == line.Value && x.User == x.User);
         }
     }
 }

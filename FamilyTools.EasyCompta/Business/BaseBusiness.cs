@@ -1,12 +1,12 @@
-﻿using FamilyTools.EasyCompta.DataBase.Context;
+﻿using FamilyTools.Data.Context;
+using FamilyTools.Data.Models.EasyCompta;
 using FamilyTools.EasyCompta.IBusiness;
-using FamilyTools.EasyCompta.Models;
 
 namespace FamilyTools.EasyCompta.Business
 {
-    public class BaseBusiness<T>(AccountContext context) : IBaseBusiness<T> where T : BaseModel
+    public class BaseBusiness<T>(EasyComptaContext context) : IBaseBusiness<T> where T : BaseModel
     {
-        protected readonly AccountContext _context = context;
+        protected readonly EasyComptaContext _context = context;
 
         public virtual async Task<T> Create(T t)
         {
@@ -14,16 +14,16 @@ namespace FamilyTools.EasyCompta.Business
             {
                 t.Id = default;
                 t.CreationDate = DateTime.Now;
-                this._context.Add(t);
+                this._context.Set<T>().Add(t);
                 await _context.SaveChangesAsync();
-                return await this.Find(t) ?? default;
+                return t;
             }
-            return default;
+            return t;
         }
 
         public virtual async Task<bool> Delete(int id)
         {
-            if (id != default)
+            if (id > -1)
             {
                 T? t = await this.Find(id);
                 if (t != null)
@@ -40,16 +40,16 @@ namespace FamilyTools.EasyCompta.Business
         {
             if (t != null)
             {
-                return (T?)await this._context.FindAsync(typeof(T), t.Id);
+                return (T?)await this._context.Set<T>().FindAsync(t.Id);
             }
             return default;
         }
 
         public virtual async Task<T?> Find(int id)
         {
-            if (id != default)
+            if (id > -1)
             {
-                return (T?)await this._context.FindAsync(typeof(T), id);
+                return (T?)await this._context.Set<T>().FindAsync(id);
             }
             return default;
         }

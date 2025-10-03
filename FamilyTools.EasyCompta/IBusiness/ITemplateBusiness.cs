@@ -1,4 +1,4 @@
-﻿using FamilyTools.EasyCompta.Models;
+﻿using FamilyTools.Data.Models.EasyCompta;
 
 namespace FamilyTools.EasyCompta.IBusiness
 {

@@ -1,0 +1,24 @@
+<form [formGroup]="lineForm">
+    <div class="form-container">
+
+        <div class="form-section">
+
+            <div class="form-group">
+                <label class="form-label">Catégorie <span class="required">*</span></label>
+                <select class="form-select" id="user" required>
+                    <option value="">Sélectionner un utilisateur</option>
+                    @for (user of this.service.all_user; track $index) {
+                    <option value="{{ user.id }}"> {{ user.userName }}</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label required-label">Valeur<span class="required">*</span></label>
+                <input type="number" class="form-control" placeholder="selectionné une valeur" formControlName="value"
+                    required>
+            </div>
+            <button type="button" (click)="deleteLine(this.line?.id ?? -1)"><span class="action-icon">🗑️</span></button>
+        </div>
+    </div>
+</form>

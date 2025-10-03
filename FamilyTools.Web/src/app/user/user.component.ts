@@ -1,8 +1,8 @@
 import { Component, inject} from '@angular/core';
 import { User } from '../models/user';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { UserService } from './user.service';
 import { DatePipe } from '@angular/common';
+import { UserService } from '../service/accountService/user.service';
 
 @Component({
   selector: 'app-user',
@@ -43,11 +43,11 @@ export class UserComponent{
     this.isSubmit = true;
 
     if(this.userform.valid){
-        let user : User = {
-          firstName: this.userform.getRawValue().firstname,
-          lastName: this.userform.getRawValue().lastname,
-          userName: this.userform.getRawValue().username
-        };
+        let user : User = new User (
+          this.userform.getRawValue().firstname,
+          this.userform.getRawValue().lastname,
+          this.userform.getRawValue().username
+        );
         this.service.createUserApi(user);
     }
 

@@ -20,7 +20,8 @@ namespace FamilyTools.EasyCompta.Controllers
         {
             try
             {
-                return this.Ok(await this.business.GetPageByDate(DateTime.Now));
+                var result = await this.business.GetPageByDate(DateTime.Now);
+                return this.Ok(result);
             }
             catch (Exception ex)
             {
@@ -35,7 +36,23 @@ namespace FamilyTools.EasyCompta.Controllers
         {
             try
             {
-                return this.Ok(await this.business.GetPageByDate(date));
+                var result = await this.business.GetPageByDate(date);
+                return this.Ok(result);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex.Message);
+                return this.BadRequest();
+            }
+        }
+
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllMonth()
+        {
+            try
+            {
+                return this.Ok(await this.business.GetAllMonth());
             }
             catch (Exception ex)
             {

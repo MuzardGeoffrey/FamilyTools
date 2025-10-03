@@ -1,5 +1,5 @@
-﻿using FamilyTools.EasyCompta.IBusiness;
-using FamilyTools.EasyCompta.Models;
+﻿using FamilyTools.Data.Models.EasyCompta;
+using FamilyTools.EasyCompta.IBusiness;
 
 using Microsoft.AspNetCore.Mvc;
 

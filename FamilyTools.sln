@@ -3,12 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyTools.AppHost", "FamilyTools.AppHost\FamilyTools.AppHost.csproj", "{0AAEE907-FA32-43A4-81A2-34AFEBF1A9F0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CDF942AD-DE62-4283-B767-6361D969279F} = {CDF942AD-DE62-4283-B767-6361D969279F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyTools.ServiceDefaults", "FamilyTools.ServiceDefaults\FamilyTools.ServiceDefaults.csproj", "{C3FE793C-8C15-2DEE-0CEC-B9163BF311CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyTools.EasyCompta", "FamilyTools.EasyCompta\FamilyTools.EasyCompta.csproj", "{4514209A-528B-DDF6-1F68-A7ADD22FC82A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CDF942AD-DE62-4283-B767-6361D969279F} = {CDF942AD-DE62-4283-B767-6361D969279F}
+	EndProjectSection
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "FamilyTools.Web", "FamilyTools.Web\FamilyTools.Web.esproj", "{CF1CC7E2-5D0B-3C1A-B9D2-C485E7301983}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyTools.Data", "FamilyTools.Data\FamilyTools.Data.csproj", "{CDF942AD-DE62-4283-B767-6361D969279F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyTools.MigrationService", "FamilyTools.MigrationService\FamilyTools.MigrationService.csproj", "{F2D330CE-24A7-644E-8728-2EB3BB91E345}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CDF942AD-DE62-4283-B767-6361D969279F} = {CDF942AD-DE62-4283-B767-6361D969279F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +47,14 @@ Global
 		{CF1CC7E2-5D0B-3C1A-B9D2-C485E7301983}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF1CC7E2-5D0B-3C1A-B9D2-C485E7301983}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF1CC7E2-5D0B-3C1A-B9D2-C485E7301983}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CDF942AD-DE62-4283-B767-6361D969279F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDF942AD-DE62-4283-B767-6361D969279F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDF942AD-DE62-4283-B767-6361D969279F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDF942AD-DE62-4283-B767-6361D969279F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D330CE-24A7-644E-8728-2EB3BB91E345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D330CE-24A7-644E-8728-2EB3BB91E345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D330CE-24A7-644E-8728-2EB3BB91E345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D330CE-24A7-644E-8728-2EB3BB91E345}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
