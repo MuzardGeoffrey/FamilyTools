@@ -5,20 +5,19 @@ using FamilyTools.Data.Seed.EasyCompta;
 
 using Microsoft.EntityFrameworkCore;
 
+
+
+
 namespace FamilyTools.Data.Context
 {
-    public class EasyComptaContext : DbContext
+    public class EasyComptaContext(DbContextOptions<EasyComptaContext> options) : DbContext(options)
     {
-        public EasyComptaContext(DbContextOptions<EasyComptaContext> options) : base(options)
-        {
-        }
-
-        public DbSet<User> Users { get; set; }
-        public DbSet<AccountEnter> AccountEnters { get; set; }
-        public DbSet<AccountLine> AccountLines { get; set; }
-        public DbSet<AccountPage> AccountPages { get; set; }
-        public DbSet<AccountTag> AccountTags { get; set; }
-        public DbSet<Template> Templates { get; set; }
+        public DbSet<User> Users => Set<User>();
+        public DbSet<AccountEnter> AccountEnters => Set<AccountEnter>();
+        public DbSet<AccountLine> AccountLines => Set<AccountLine>();
+        public DbSet<AccountPage> AccountPages => Set<AccountPage>();
+        public DbSet<AccountTag> AccountTags => Set<AccountTag>();
+        public DbSet<Template> Templates => Set<Template>();
 
         public async Task EnsureSeedData()
         {

@@ -13,8 +13,9 @@ var migration = builder.AddProject<Projects.FamilyTools_MigrationService>("migra
 
 var easyComptaAPI = builder
     .AddProject<Projects.FamilyTools_EasyCompta>(name: "EasyComptaAPI")
+    .WithReference(sql)
     .WithReference(migration)
-    .WaitFor(migration)
+    .WaitForCompletion(migration)
     .WithExternalHttpEndpoints()
     .PublishAsDockerFile();
 
